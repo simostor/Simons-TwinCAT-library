@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
-  <POU Name="MAIN" Id="{76ab99c2-600b-41ce-824f-f20e8be30e39}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+  <POU Name="PRG_SignalGenerators_TEST" Id="{069c858e-8fc4-4085-9d60-c0c54c3c4a3e}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_SignalGenerators_TEST
 VAR
-	
 END_VAR
 ]]></Declaration>
     <Implementation>

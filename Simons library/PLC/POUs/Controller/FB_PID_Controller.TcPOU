@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_PID_Controller" Id="{0bc8d511-12ca-4dfb-ad0e-bd1e6c62fad3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_PID_Controller
+VAR_INPUT
+	setpoint : REAL;
+	feedback : REAL;
+	KP : REAL;
+	KI : REAL;
+	KD : REAL;
+END_VAR
+VAR_OUTPUT
+	controlSignal : REAL;
+END_VAR
+VAR
+	currentError : REAL;
+	accumulatedError : REAL;
+	deltaError : REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[error := setpoint - feedback;
+
+controlSignal := KP*error + KI*accumulatedError + KD*deltaError;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
-  <POU Name="MAIN" Id="{76ab99c2-600b-41ce-824f-f20e8be30e39}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+  <POU Name="FB_MassSpringDamper" Id="{6a015b13-d290-41b6-8a34-072b141df437}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM FB_MassSpringDamper
 VAR
-	
 END_VAR
 ]]></Declaration>
     <Implementation>

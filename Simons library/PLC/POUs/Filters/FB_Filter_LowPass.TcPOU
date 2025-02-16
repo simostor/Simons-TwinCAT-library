@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
-  <POU Name="MAIN" Id="{76ab99c2-600b-41ce-824f-f20e8be30e39}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+  <POU Name="FB_Filter_LowPass" Id="{09a317c6-1b69-42ae-bf7c-6979c46a34ca}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Filter_LowPass
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
 VAR
-	
 END_VAR
 ]]></Declaration>
     <Implementation>

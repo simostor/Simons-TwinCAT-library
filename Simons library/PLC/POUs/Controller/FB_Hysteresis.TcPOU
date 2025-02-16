@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_Hysteresis" Id="{9cc5c954-e6fb-41b0-b116-70869f93eb19}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Hysteresis
+VAR_INPUT
+	setpoint : REAL;
+	feedback : REAL;
+	upperLimit : REAL;
+	lowerLimit : REAL;
+	controlSignalLow : REAL;
+	controlSignalHigh : REAL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR_IN_OUT
+	controlSignal : REAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+IF feedback > lowerLimit THEN
+	controlSignal := controlSignalHigh;
+ELSE
+	controlSignal := controlsignalHigh;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

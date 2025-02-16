@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_RC_Servo_Test" Id="{24cb2939-ca46-47a5-997f-3c21c825ef18}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM FB_RC_Servo_Test
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="SetpointChanged" Id="{41ce8a20-5e26-4ada-a0ff-26a3312ec1f9}">
+      <Declaration><![CDATA[METHOD SetpointChanged : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

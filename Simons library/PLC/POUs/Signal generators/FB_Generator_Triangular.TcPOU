@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
-  <POU Name="MAIN" Id="{76ab99c2-600b-41ce-824f-f20e8be30e39}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+  <POU Name="FB_Generator_Triangular" Id="{d22016f6-3df3-4b82-8257-88b394ede0df}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Generator_Triangular
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
 VAR
-	
 END_VAR
 ]]></Declaration>
     <Implementation>

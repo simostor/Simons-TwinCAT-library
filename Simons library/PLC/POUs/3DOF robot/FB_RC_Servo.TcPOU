@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_RC_Servo" Id="{f9c2ce82-3d86-42bf-b049-c4e05cd4c773}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_RC_Servo
+VAR_INPUT
+	stop : BOOL; // Stops motor at current position
+	setpoint : INT; // Angle to reach
+	rampSpeed : REAL; // Speed setpoint for servo angle
+	trapezoidalProfileActive : BOOL; // Smooths speed of servo at start and end of movement
+	servoAngleMin : INT; // Lower limit of function block output angle
+	servoAngleMax : INT; // Upper limit of function block output angle
+	rampCycleTime : TIME;
+END_VAR
+VAR_OUTPUT
+	currentPositionSetpoint : INT; // The actual output of function block
+	error : STRING; // Error output for debug
+END_VAR
+VAR
+	ramp : FB_CTRL_RAMP_GENERATOR;
+	rampParameters : ST_CTRL_RAMP_GENERATOR_PARAMS;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[ramp.fVeloNeg := rampSpeed;
+ramp.fVeloPos := rampSpeed;
+ramp.tCtrlCycleTime := rampCycleTime;
+rampParameters.tTaskCycleTime := rampCycleTime;
+ramp(stParams := rampParameters);
+
+IF stop THEN
+	ramp.bEnable := FALSE;
+ELSE
+	ramp.bEnable := TRUE;
+END_IF
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
