@@ -36,6 +36,9 @@
     <Compile Include="POUs\3DOF robot\TEST\PRG_ThreeDOF_robot_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Controller\FB_Adaptive_PID_Controller.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Controller\FB_Hysteresis.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -67,6 +70,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Notes.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Signal generators\FB_Generator_PWM.TcPOU">
@@ -102,6 +108,7 @@
     <Folder Include="POUs\Controller" />
     <Folder Include="POUs\Equipment simulation" />
     <Folder Include="POUs\Filters\TEST" />
+    <Folder Include="POUs\DC motor control" />
     <Folder Include="POUs\Signal generators" />
     <Folder Include="POUs\Signal generators\TEST" />
     <Folder Include="POUs\Stepper control" />
@@ -111,6 +118,7 @@
   <ItemGroup>
     <PlaceholderReference Include="Tc2_ControllerToolbox">
       <DefaultResolution>Tc2_ControllerToolbox, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_ControllerToolbox</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -149,6 +157,9 @@
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="TcUnit">
+      <DefaultResolution>TcUnit, * (www.tcunit.org)</DefaultResolution>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>

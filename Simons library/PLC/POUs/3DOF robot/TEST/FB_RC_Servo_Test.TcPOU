@@ -8,8 +8,35 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="OutputIsRamped" Id="{c6c2b614-442f-4d63-8f83-fa57d57ac245}">
+      <Declaration><![CDATA[METHOD PRIVATE OutputIsRamped
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="SetpointChanged" Id="{41ce8a20-5e26-4ada-a0ff-26a3312ec1f9}">
-      <Declaration><![CDATA[METHOD SetpointChanged : BOOL
+      <Declaration><![CDATA[METHOD PRIVATE SetpointChanged
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetpointReached" Id="{252f47a2-5e55-4adc-90a4-a48c27cfe6f0}">
+      <Declaration><![CDATA[METHOD PRIVATE SetpointReached
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Stop" Id="{0c9d5730-d2c3-418d-9801-6657e45c7a44}">
+      <Declaration><![CDATA[METHOD PRIVATE Stop
 VAR_INPUT
 END_VAR
 ]]></Declaration>

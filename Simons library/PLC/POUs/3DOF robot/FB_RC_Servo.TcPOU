@@ -9,7 +9,7 @@ VAR_INPUT
 	trapezoidalProfileActive : BOOL; // Smooths speed of servo at start and end of movement
 	servoAngleMin : INT; // Lower limit of function block output angle
 	servoAngleMax : INT; // Upper limit of function block output angle
-	rampCycleTime : TIME;
+	rampCycleTime : TIME; // Set rampCycleTime to the same as the task sycle time
 END_VAR
 VAR_OUTPUT
 	currentPositionSetpoint : INT; // The actual output of function block
