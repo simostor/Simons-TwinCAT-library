@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="Tips_and_tricks" Id="{8f2bc4d2-f867-495c-a56d-85046e3b6546}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Tips_and_tricks
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Shortcuts
+
+// Comment muliple lines of code: CTRL + K, CTRL + U
+// Uncomment multiple lines of code : CTRL + K, CTRL + U]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

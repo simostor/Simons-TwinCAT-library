@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_Max_Value_Test" Id="{adf3ba5e-5a03-434b-a82b-cde5610e43c9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Max_Value_Test EXTENDS TcUnit.FB_TestSuite
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FirstValueIsBiggest();
+SecondValueIsBiggest();
+ValuesAreEqual();]]></ST>
+    </Implementation>
+    <Method Name="FirstValueIsBiggest" Id="{b97959e4-bdbd-4f26-b6cb-1adfe065b1c9}">
+      <Declaration><![CDATA[METHOD FirstValueIsBiggest
+VAR
+	Maximum : FB_Max_Value;
+	Result: LREAL;
+	ExpectedMax : LREAL := 3;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TEST: First Value Is Biggest');
+
+Maximum(value1 := 3, value2 := 1, result => Result);
+
+AssertEquals(Expected := ExpectedMax,
+			Actual := Result,
+			Message := 'Max value not found');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SecondValueIsBiggest" Id="{91cb6d46-0c42-490b-8e47-19d341bcf3b0}">
+      <Declaration><![CDATA[METHOD SecondValueIsBiggest
+VAR
+	Maximum : FB_Max_Value;
+	Result : LREAL;
+	ExpectedMax : LREAL := 9;
+	
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TEST: Second value is largest');
+
+Maximum(value1 := 1, value2 := 9, result => Result);
+
+AssertEquals(Expected := ExpectedMax,
+			Actual := Result,
+			Message := 'Largest value not found');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ValuesAreEqual" Id="{7319594c-6dd5-4b37-80e4-5e5eb5741678}">
+      <Declaration><![CDATA[METHOD ValuesAreEqual
+VAR
+	Maximum : FB_Max_Value;
+	Result : LREAL;
+	ExpectedMax : LREAL := -999;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Checks output if both input values are the same');
+
+Maximum(value1 := -999,
+		value2 := -999,
+		result => Result);
+
+AssertEquals(Expected := ExpectedMax,
+			Actual := Result,
+			Message := 'Largest value not found');
+			
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

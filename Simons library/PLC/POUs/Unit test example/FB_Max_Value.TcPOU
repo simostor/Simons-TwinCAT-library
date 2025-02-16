@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_Max_Value" Id="{7895e463-28a2-41a7-9cc8-cd3a5de3fc3d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Max_Value
+VAR_INPUT
+	value1 : LREAL;
+	value2 : LREAL;
+END_VAR
+VAR_OUTPUT
+	result : LREAL;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF value1 >= value2 THEN
+	result := value1;
+ELSIF value1 <= value2 THEN
+	result := value2;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

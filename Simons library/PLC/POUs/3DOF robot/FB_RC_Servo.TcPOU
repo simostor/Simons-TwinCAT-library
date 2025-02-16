@@ -10,6 +10,7 @@ VAR_INPUT
 	servoAngleMin : INT; // Lower limit of function block output angle
 	servoAngleMax : INT; // Upper limit of function block output angle
 	rampCycleTime : TIME; // Set rampCycleTime to the same as the task sycle time
+	rampStartPos : INT; // Starting position
 END_VAR
 VAR_OUTPUT
 	currentPositionSetpoint : INT; // The actual output of function block
@@ -21,17 +22,20 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[ramp.fVeloNeg := rampSpeed;
-ramp.fVeloPos := rampSpeed;
-ramp.tCtrlCycleTime := rampCycleTime;
+      <ST><![CDATA[rampParameters.fVeloNeg := rampSpeed;
+rampParameters.fVeloPos := rampSpeed;
+rampParameters.tCtrlCycleTime := rampCycleTime;
 rampParameters.tTaskCycleTime := rampCycleTime;
 ramp(stParams := rampParameters);
+ramp.fStart := rampStartPos;
+ramp.fTarget := setpoint;
 
 IF stop THEN
 	ramp.bEnable := FALSE;
 ELSE
 	ramp.bEnable := TRUE;
 END_IF
+
 
 ]]></ST>
     </Implementation>

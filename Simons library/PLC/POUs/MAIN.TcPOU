@@ -3,11 +3,15 @@
   <POU Name="MAIN" Id="{76ab99c2-600b-41ce-824f-f20e8be30e39}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	
+	counter : INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[counter := counter + 1;
+
+IF counter > 999 THEN
+	counter := 0;
+END_IF]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

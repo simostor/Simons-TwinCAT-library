@@ -1,15 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
-  <POU Name="FB_RC_Servo_Test" Id="{24cb2939-ca46-47a5-997f-3c21c825ef18}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM FB_RC_Servo_Test
-VAR
-END_VAR
-]]></Declaration>
+  <POU Name="FB_RC_Servo_Test" Id="{03ef9bed-a740-4d16-836d-7c880d928d4f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_RC_Servo_Test EXTENDS TcUnit.FB_TestSuite]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[SetpointReached();]]></ST>
     </Implementation>
-    <Method Name="OutputIsRamped" Id="{c6c2b614-442f-4d63-8f83-fa57d57ac245}">
-      <Declaration><![CDATA[METHOD PRIVATE OutputIsRamped
+    <Method Name="OutpuIsRamped" Id="{557fe578-98bf-49e6-93fd-344654483c78}">
+      <Declaration><![CDATA[METHOD PRIVATE OutpuIsRamped
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -17,7 +14,7 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SetpointChanged" Id="{41ce8a20-5e26-4ada-a0ff-26a3312ec1f9}">
+    <Method Name="SetpointChanged" Id="{36afbb44-edb3-4ebd-b626-09555da2a097}">
       <Declaration><![CDATA[METHOD PRIVATE SetpointChanged
 VAR_INPUT
 END_VAR
@@ -26,8 +23,38 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SetpointReached" Id="{252f47a2-5e55-4adc-90a4-a48c27cfe6f0}">
-      <Declaration><![CDATA[METHOD PRIVATE SetpointReached
+    <Method Name="SetpointReached" Id="{8b035494-74d9-4637-aeda-8bb4b708ea31}">
+      <Declaration><![CDATA[METHOD SetpointReached
+VAR
+	Servo : FB_RC_Servo;
+	Setpoint : INT := 10;
+	ExpectedSetpointReached : INT := 10;
+	Result : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TEST: Setpoint reached');
+
+Servo(stop := FALSE,
+	setpoint := Setpoint,
+	rampSpeed := 10,
+	trapezoidalProfileActive := FALSE,
+	servoAngleMin := 0,
+	servoAngleMax := 100,
+	rampCycleTime := T#1MS,
+	currentPositionSetpoint => Result);
+	
+	
+
+AssertEquals(Expected := ExpectedSetpointReached,
+	Actual := Servo.currentPositionSetpoint,
+	Message := 'Expected value not reached');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartingPosition" Id="{bae9910b-fa54-4115-b0d1-420fbae8a281}">
+      <Declaration><![CDATA[METHOD PRIVATE StartingPosition
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -35,7 +62,7 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Stop" Id="{0c9d5730-d2c3-418d-9801-6657e45c7a44}">
+    <Method Name="Stop" Id="{85fc3fb1-42c1-4b4e-80db-93ea81d1e0b1}">
       <Declaration><![CDATA[METHOD PRIVATE Stop
 VAR_INPUT
 END_VAR

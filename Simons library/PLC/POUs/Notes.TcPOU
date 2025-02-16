@@ -6,7 +6,9 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[// Write notes here
+
+// Comment out ]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

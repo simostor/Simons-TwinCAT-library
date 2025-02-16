@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_Sequence_Recorder_Test" Id="{f5c2b13f-1378-4b19-a6ca-f4d7d00d8751}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Sequence_Recorder_Test
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AddPosition" Id="{250ab92c-fe4b-4de2-89fa-461cfea3cf83}">
+      <Declaration><![CDATA[METHOD PRIVATE AddPosition
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

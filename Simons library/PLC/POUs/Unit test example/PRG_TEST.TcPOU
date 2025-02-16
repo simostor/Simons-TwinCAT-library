@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
-  <POU Name="PRG_ThreeDOF_robot_TEST" Id="{e4d7c900-4ddd-4d6a-8b55-ef2e1fbec25d}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM PRG_ThreeDOF_robot_TEST
+  <POU Name="PRG_TEST" Id="{6e915b6b-d635-4ca5-ad05-73f49eb5e09a}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_TEST
 VAR
-	fb_RC_Servo_Test : FB_RC_Servo_Test;
+	fb_Max_Value_Test : FB_Max_Value_Test;
 END_VAR
 ]]></Declaration>
     <Implementation>
