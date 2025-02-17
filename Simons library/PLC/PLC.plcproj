@@ -36,7 +36,10 @@
     <Compile Include="POUs\3DOF robot\TEST\FB_Sequence_Recorder_Test.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\3DOF robot\TEST\PRG_ThreeDOF_robot_TEST.TcPOU">
+    <Compile Include="POUs\3DOF robot\TEST\Manual_Test.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\3DOF robot\TEST\PRG_TEST_ThreeDOF_robot.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Controller\FB_Adaptive_PID_Controller.TcPOU">
@@ -70,9 +73,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Filters\TEST\PRG_Filters_TEST.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Notes.TcPOU">

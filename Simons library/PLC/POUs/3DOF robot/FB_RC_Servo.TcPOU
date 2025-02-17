@@ -26,7 +26,6 @@ END_VAR
 rampParameters.fVeloPos := rampSpeed;
 rampParameters.tCtrlCycleTime := rampCycleTime;
 rampParameters.tTaskCycleTime := rampCycleTime;
-ramp(stParams := rampParameters);
 ramp.fStart := rampStartPos;
 ramp.fTarget := setpoint;
 
@@ -36,6 +35,7 @@ ELSE
 	ramp.bEnable := TRUE;
 END_IF
 
+ramp(stParams := rampParameters);
 
 ]]></ST>
     </Implementation>

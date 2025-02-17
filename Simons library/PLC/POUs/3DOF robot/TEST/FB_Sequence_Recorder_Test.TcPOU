@@ -12,8 +12,44 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="AddPosition" Id="{250ab92c-fe4b-4de2-89fa-461cfea3cf83}">
-      <Declaration><![CDATA[METHOD PRIVATE AddPosition
+    <Method Name="AddOnePosition" Id="{250ab92c-fe4b-4de2-89fa-461cfea3cf83}">
+      <Declaration><![CDATA[METHOD AddOnePosition
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddTwoPositions" Id="{66c4d13e-c182-461b-8d96-1bf4269358c5}">
+      <Declaration><![CDATA[METHOD AddTwoPositions
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ClearPositions" Id="{03ab6b4d-1a72-4043-b3ca-81bc8d2c5f10}">
+      <Declaration><![CDATA[METHOD ClearPositions : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadPositionAtIndex" Id="{ea34b956-ca49-44d9-87ea-92c3dd07c58f}">
+      <Declaration><![CDATA[METHOD ReadPositionAtIndex
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReturnTwoPositions" Id="{29c1f1ce-f976-43a3-82a0-8a3a1034c1e6}">
+      <Declaration><![CDATA[METHOD ReturnTwoPositions
 VAR_INPUT
 END_VAR
 ]]></Declaration>

@@ -3,10 +3,11 @@
   <POU Name="FB_RC_Servo_Test" Id="{03ef9bed-a740-4d16-836d-7c880d928d4f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_RC_Servo_Test EXTENDS TcUnit.FB_TestSuite]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SetpointReached();]]></ST>
+      <ST><![CDATA[SetpointReached();
+// Stop();]]></ST>
     </Implementation>
-    <Method Name="OutpuIsRamped" Id="{557fe578-98bf-49e6-93fd-344654483c78}">
-      <Declaration><![CDATA[METHOD PRIVATE OutpuIsRamped
+    <Method Name="OutputRamped" Id="{557fe578-98bf-49e6-93fd-344654483c78}">
+      <Declaration><![CDATA[METHOD PRIVATE OutputRamped
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -44,7 +45,7 @@ Servo(stop := FALSE,
 	rampCycleTime := T#1MS,
 	currentPositionSetpoint => Result);
 	
-	
+
 
 AssertEquals(Expected := ExpectedSetpointReached,
 	Actual := Servo.currentPositionSetpoint,
@@ -64,6 +65,69 @@ END_VAR
     </Method>
     <Method Name="Stop" Id="{85fc3fb1-42c1-4b4e-80db-93ea81d1e0b1}">
       <Declaration><![CDATA[METHOD PRIVATE Stop
+VAR
+	stop : BOOL;
+	init1 : BOOL := TRUE;
+	init2 : BOOL := TRUE;
+	init3 : BOOL := TRUE;
+	intermediateVal1 : INT;
+	intermediateVal2 : INT;
+	valuesAreEqualAndNotZero : BOOL := FALSE;
+	startValue : INT := 0;
+	setpoint : INT := 10000;
+	minValue : INT := 0;
+	maxValue : INT := 10000;
+	cycleTime : TIME := T#1MS;
+	rampSpeed : INT := 20;
+	FB_Servo: FB_RC_Servo;
+	timer1: TON;
+	timer2: TON;
+	ExpectedValue : BOOL := TRUE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF init1 THEN
+	stop := FALSE;
+	init1 := FALSE;
+END_IF;
+
+timer1(IN:= TRUE, PT:= T#1000S, Q=> , ET=> );
+timer2(IN:= TRUE, PT:= T#1000S, Q=> , ET=> );
+
+FB_Servo(
+	stop:= stop, 
+	setpoint:= setpoint, 
+	rampSpeed:= rampSpeed, 
+	trapezoidalProfileActive:= FALSE, 
+	servoAngleMin:= minValue, 
+	servoAngleMax:= maxValue, 
+	rampCycleTime:= cycleTime, 
+	rampStartPos:= startValue, 
+	currentPositionSetpoint=> , 
+	error=> );
+
+IF timer1.ET > T#1S AND init2 THEN
+	stop := TRUE;
+	intermediateVal1 := FB_Servo.currentPositionSetpoint;
+	init2 := FALSE;
+END_IF
+
+IF timer2.ET > T#2S AND init3 THEN
+	IF intermediateVal1 = intermediateVal2 AND intermediateVal1 <> 0 THEN
+		valuesAreEqualAndNotZero := TRUE;
+	END_IF
+END_IF
+
+AssertEquals(
+Expected:= ExpectedValue,
+ Actual:= valuesAreEqualAndNotZero,
+ Message:= 'Ramp was not stopped or value was not ramped');
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Trapezoidal" Id="{f76f3628-c236-4862-a00d-cdcbd1386b7e}">
+      <Declaration><![CDATA[METHOD PRIVATE Trapezoidal
 VAR_INPUT
 END_VAR
 ]]></Declaration>
