@@ -4,6 +4,7 @@
     <Declaration><![CDATA[PROGRAM PRG_TEST_ThreeDOF_robot
 VAR
 	fb_RC_Servo_Test : FB_RC_Servo_Test;
+	fb_Sequence_Recorder : FB_Sequence_Recorder_Test;
 END_VAR
 ]]></Declaration>
     <Implementation>

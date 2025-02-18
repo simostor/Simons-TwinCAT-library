@@ -3,10 +3,24 @@
   <POU Name="FB_Sequence_Recorder" Id="{daa4dfec-49d8-4243-801e-420997c23b3c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Sequence_Recorder
 VAR_INPUT
+	inputBase : INT;
+	inputShoulder : INT;
+	inputElbow : INT;
+	recordPosition : BOOL;
+	returnPositionAtIndex : INT;
+	deletePositions : BOOL;
 END_VAR
 VAR_OUTPUT
+	outputBase : INT;
+	outputShoulder : INT;
+	outputElbow : INT;
+	numberRecordedPositions : INT;
+	arrayFull : BOOL;
 END_VAR
 VAR
+	basePositions : ARRAY[0..9] OF INT;
+	shoulderPositions : ARRAY[0..9] OF INT;
+	elbowPositions : ARRAY[0..9] OF INT;
 END_VAR
 ]]></Declaration>
     <Implementation>

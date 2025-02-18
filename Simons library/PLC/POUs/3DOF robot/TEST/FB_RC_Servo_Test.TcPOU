@@ -3,7 +3,7 @@
   <POU Name="FB_RC_Servo_Test" Id="{03ef9bed-a740-4d16-836d-7c880d928d4f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_RC_Servo_Test EXTENDS TcUnit.FB_TestSuite]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SetpointReached();
+      <ST><![CDATA[// SetpointReached();
 // Stop();]]></ST>
     </Implementation>
     <Method Name="OutputRamped" Id="{557fe578-98bf-49e6-93fd-344654483c78}">

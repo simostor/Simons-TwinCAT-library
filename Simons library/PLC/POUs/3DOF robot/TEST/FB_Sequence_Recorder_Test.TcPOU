@@ -1,24 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="FB_Sequence_Recorder_Test" Id="{f5c2b13f-1378-4b19-a6ca-f4d7d00d8751}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_Sequence_Recorder_Test
-VAR_INPUT
-END_VAR
-VAR_OUTPUT
-END_VAR
-VAR
-END_VAR
-]]></Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Sequence_Recorder_Test EXTENDS TcUnit.FB_TestSuite]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[AddOnePosition();]]></ST>
     </Implementation>
     <Method Name="AddOnePosition" Id="{250ab92c-fe4b-4de2-89fa-461cfea3cf83}">
       <Declaration><![CDATA[METHOD AddOnePosition
-VAR_INPUT
+VAR
+	//FB_Seq_Rec : FB_Sequence_Recorder;
+	inputBaseAngle : INT := 123;
+	inputShoulderAngle : INT := 123;
+	inputElbowAngle : INT := 123;
+	expectedBaseAngle : INT := 123;
+	actualBaseAngle : INT;
+	FB_Seq_Rec: FB_Sequence_Recorder;
+	recordPosition : BOOL := TRUE;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[TEST('TEST: Add one position');
+
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle, 
+	inputShoulder:= inputShoulderAngle, 
+	inputElbow:= inputElbowAngle, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> actualBaseAngle, 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	arrayFull=> );
+
+IF recordPosition THEN
+	recordPosition := FALSE;
+END_IF
+
+AssertEquals(Expected := expectedBaseAngle,
+	Actual := actualBaseAngle,
+	Message := 'Position was not recorded');
+	
+TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
     <Method Name="AddTwoPositions" Id="{66c4d13e-c182-461b-8d96-1bf4269358c5}">
