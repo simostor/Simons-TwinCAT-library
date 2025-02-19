@@ -3,12 +3,13 @@
   <POU Name="FB_Sequence_Recorder_Test" Id="{f5c2b13f-1378-4b19-a6ca-f4d7d00d8751}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Sequence_Recorder_Test EXTENDS TcUnit.FB_TestSuite]]></Declaration>
     <Implementation>
-      <ST><![CDATA[AddOnePosition();]]></ST>
+      <ST><![CDATA[AddOnePosition();
+AddTwoPositions();
+ClearPositions();]]></ST>
     </Implementation>
     <Method Name="AddOnePosition" Id="{250ab92c-fe4b-4de2-89fa-461cfea3cf83}">
       <Declaration><![CDATA[METHOD AddOnePosition
 VAR
-	//FB_Seq_Rec : FB_Sequence_Recorder;
 	inputBaseAngle : INT := 123;
 	inputShoulderAngle : INT := 123;
 	inputElbowAngle : INT := 123;
@@ -40,27 +41,139 @@ END_IF
 
 AssertEquals(Expected := expectedBaseAngle,
 	Actual := actualBaseAngle,
-	Message := 'Position was not recorded');
+	Message := 'Position 1 was not recorded');
 	
 TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
     <Method Name="AddTwoPositions" Id="{66c4d13e-c182-461b-8d96-1bf4269358c5}">
       <Declaration><![CDATA[METHOD AddTwoPositions
-VAR_INPUT
+VAR
+	inputBaseAngle1 : INT := 123;
+	inputShoulderAngle1 : INT := 123;
+	inputElbowAngle1 : INT := 123;
+	expectedBaseAngle1 : INT := 123;
+	inputBaseAngle2 : INT := 234;
+	inputShoulderAngle2 : INT := 234;
+	inputElbowAngle2 : INT := 234;
+	expectedShoulderAngle2 : INT := 234;
+	actualShoulderAngle1 : INT;
+	actualShoulderAngle2 : INT;
+	FB_Seq_Rec: FB_Sequence_Recorder;
+	recordPosition : BOOL := TRUE;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[TEST('TEST: Add two positions');
+
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle1, 
+	inputShoulder:= inputShoulderAngle1, 
+	inputElbow:= inputElbowAngle1, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> actualShoulderAngle1, 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	arrayFull=> );
+	
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle2, 
+	inputShoulder:= inputShoulderAngle2, 
+	inputElbow:= inputElbowAngle2, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 1, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> actualShoulderAngle2, 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	arrayFull=> );
+
+IF recordPosition THEN
+	recordPosition := FALSE;
+END_IF
+
+AssertEquals(Expected := expectedShoulderAngle2,
+	Actual := actualShoulderAngle2,
+	Message := 'Position 2 was not recorded');
+	
+TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ClearPositions" Id="{03ab6b4d-1a72-4043-b3ca-81bc8d2c5f10}">
       <Declaration><![CDATA[METHOD ClearPositions : BOOL
-VAR_INPUT
+VAR
+	inputBaseAngle1 : INT := 123;
+	inputShoulderAngle1 : INT := 123;
+	inputElbowAngle1 : INT := 123;
+	expectedBaseAngle1 : INT := 123;
+	inputBaseAngle2 : INT := 234;
+	inputShoulderAngle2 : INT := 234;
+	inputElbowAngle2 : INT := 234;
+	expectedShoulderAngle2 : INT := 0;
+	actualShoulderAngle1 : INT;
+	actualShoulderAngle2 : INT;
+	FB_Seq_Rec: FB_Sequence_Recorder;
+	recordPosition : BOOL := TRUE;
+	delete : BOOL := FALSE;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[TEST('TEST: Clear positions');
+
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle1, 
+	inputShoulder:= inputShoulderAngle1, 
+	inputElbow:= inputElbowAngle1, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= delete, 
+	outputBase=> actualShoulderAngle1, 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	arrayFull=> );
+	
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle2, 
+	inputShoulder:= inputShoulderAngle2, 
+	inputElbow:= inputElbowAngle2, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 1, 
+	deletePositions:= delete, 
+	outputBase=> , 
+	outputShoulder=> actualShoulderAngle2, 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	arrayFull=> );
+
+IF recordPosition THEN
+	recordPosition := FALSE;
+END_IF
+
+delete := TRUE;
+
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle2, 
+	inputShoulder:= inputShoulderAngle2, 
+	inputElbow:= inputElbowAngle2, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 1, 
+	deletePositions:= delete, 
+	outputBase=> , 
+	outputShoulder=> actualShoulderAngle2, 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	arrayFull=> );
+
+AssertEquals(Expected := expectedShoulderAngle2,
+	Actual := actualShoulderAngle2,
+	Message := 'Positions were not deleted');
+	
+TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ReadPositionAtIndex" Id="{ea34b956-ca49-44d9-87ea-92c3dd07c58f}">
@@ -74,6 +187,15 @@ END_VAR
     </Method>
     <Method Name="ReturnTwoPositions" Id="{29c1f1ce-f976-43a3-82a0-8a3a1034c1e6}">
       <Declaration><![CDATA[METHOD ReturnTwoPositions
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryAddDuplicatePosition" Id="{ffc03e01-d799-4489-b7b1-8122c4070b44}">
+      <Declaration><![CDATA[METHOD TryAddDuplicatePosition
 VAR_INPUT
 END_VAR
 ]]></Declaration>

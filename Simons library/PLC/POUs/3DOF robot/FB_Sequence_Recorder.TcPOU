@@ -18,13 +18,31 @@ VAR_OUTPUT
 	arrayFull : BOOL;
 END_VAR
 VAR
+	currentIndex : INT := 0;
 	basePositions : ARRAY[0..9] OF INT;
 	shoulderPositions : ARRAY[0..9] OF INT;
 	elbowPositions : ARRAY[0..9] OF INT;
+	i : INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[IF recordPosition THEN
+	basePositions[currentIndex] := inputBase;
+	shoulderPositions[currentIndex] := inputShoulder;
+	elbowPositions[currentIndex] := inputElbow;
+	currentIndex := currentIndex + 1;
+	recordPosition := FALSE;
+END_IF
+
+outputBase := basePositions[returnPositionAtIndex];
+outputShoulder := shoulderPositions[returnPositionAtIndex];
+outputElbow := elbowPositions[returnPositionAtIndex];
+
+FOR i := 0 TO 9 DO
+    basePositions[i] := 0;
+    shoulderPositions[i] := 0;
+    elbowPositions[i] := 0;
+END_FOR]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
