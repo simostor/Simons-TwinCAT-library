@@ -5,7 +5,8 @@
     <Implementation>
       <ST><![CDATA[AddOnePosition();
 AddTwoPositions();
-ClearPositions();]]></ST>
+ClearPositions();
+AddTwoClearAddOne();]]></ST>
     </Implementation>
     <Method Name="AddOnePosition" Id="{250ab92c-fe4b-4de2-89fa-461cfea3cf83}">
       <Declaration><![CDATA[METHOD AddOnePosition
@@ -42,6 +43,92 @@ END_IF
 AssertEquals(Expected := expectedBaseAngle,
 	Actual := actualBaseAngle,
 	Message := 'Position 1 was not recorded');
+	
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddTwoClearAddOne" Id="{02463f65-ed15-4150-a2d4-e1a236ab9179}">
+      <Declaration><![CDATA[METHOD AddTwoClearAddOne
+VAR
+	inputBaseAngle1 : INT := 123;
+	inputShoulderAngle1 : INT := 123;
+	inputElbowAngle1 : INT := 123;
+	expectedBaseAngle1 : INT := 123;
+	inputBaseAngle2 : INT := 234;
+	inputShoulderAngle2 : INT := 234;
+	inputElbowAngle2 : INT := 234;
+	expectedShoulderAngle2 : INT := 234;
+	actualShoulderAngle1 : INT;
+	actualShoulderAngle2 : INT;
+	FB_Seq_Rec: FB_Sequence_Recorder;
+	recordPosition : BOOL := TRUE;
+	delete : BOOL := FALSE;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TEST: Add two, delete, then add one position');
+
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle1, 
+	inputShoulder:= inputShoulderAngle1, 
+	inputElbow:= inputElbowAngle1, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= delete, 
+	outputBase=> actualShoulderAngle1, 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	arrayFull=> );
+	
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle2, 
+	inputShoulder:= inputShoulderAngle2, 
+	inputElbow:= inputElbowAngle2, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 1, 
+	deletePositions:= delete, 
+	outputBase=> , 
+	outputShoulder=> actualShoulderAngle2, 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	arrayFull=> );
+
+delete := TRUE;
+recordPosition := FALSE;
+
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle2, 
+	inputShoulder:= inputShoulderAngle2, 
+	inputElbow:= inputElbowAngle2, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 1, 
+	deletePositions:= delete, 
+	outputBase=> , 
+	outputShoulder=> actualShoulderAngle2, 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	arrayFull=> );
+
+delete := FALSE;
+recordPosition := TRUE;
+
+
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle2, 
+	inputShoulder:= inputShoulderAngle2, 
+	inputElbow:= inputElbowAngle2, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= delete, 
+	outputBase=> , 
+	outputShoulder=> actualShoulderAngle2, 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	arrayFull=> );	
+
+AssertEquals(Expected := expectedShoulderAngle2,
+	Actual := actualShoulderAngle2,
+	Message := 'Wrong value returned');
 	
 TEST_FINISHED();]]></ST>
       </Implementation>
@@ -130,7 +217,7 @@ FB_Seq_Rec(
 	inputElbow:= inputElbowAngle1, 
 	recordPosition:= recordPosition, 
 	returnPositionAtIndex:= 0, 
-	deletePositions:= delete, 
+	deletePositions:= FALSE, 
 	outputBase=> actualShoulderAngle1, 
 	outputShoulder=> , 
 	outputElbow=> , 
