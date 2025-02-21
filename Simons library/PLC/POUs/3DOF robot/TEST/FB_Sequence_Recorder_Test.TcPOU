@@ -273,6 +273,15 @@ AssertEquals(Expected := expectedShoulderAngle2,
 TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
+    <Method Name="NumberOfPositionsStored" Id="{d14cd669-2d30-4ef8-9b8f-5a4f63e5eb68}">
+      <Declaration><![CDATA[METHOD NumberOfPositionsStored : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="TryAddDuplicatePosition" Id="{ffc03e01-d799-4489-b7b1-8122c4070b44}">
       <Declaration><![CDATA[METHOD TryAddDuplicatePosition
 VAR
