@@ -6,7 +6,8 @@
       <ST><![CDATA[AddOnePosition();
 AddTwoPositions();
 ClearPositions();
-AddTwoClearAddOne();]]></ST>
+AddTwoClearAddOne();
+TryAddDuplicatePosition();]]></ST>
     </Implementation>
     <Method Name="AddOnePosition" Id="{250ab92c-fe4b-4de2-89fa-461cfea3cf83}">
       <Declaration><![CDATA[METHOD AddOnePosition
@@ -283,11 +284,64 @@ END_VAR
     </Method>
     <Method Name="TryAddDuplicatePosition" Id="{ffc03e01-d799-4489-b7b1-8122c4070b44}">
       <Declaration><![CDATA[METHOD TryAddDuplicatePosition
-VAR_INPUT
+VAR
+	inputBaseAngle1 : INT := 0;
+	inputShoulderAngle1 : INT := 0;
+	inputElbowAngle1 : INT := 0;
+	expectedBaseAngle1 : INT := 0;
+	inputBaseAngle2 : INT := 0;
+	inputShoulderAngle2 : INT := 0;
+	inputElbowAngle2 : INT := 0;
+	expectedResult : BOOL := FALSE;
+	actualBaseAngle1 : INT;
+	actualShoulderAngle1 : INT;
+	actualElbowAngle1 : INT;
+	actualBaseAngle2 : INT;
+	actualShoulderAngle2 : INT;
+	actualElbowAngle2 : INT;
+	FB_Seq_Rec: FB_Sequence_Recorder;
+	recordPosition : BOOL := TRUE;
+	arePositionsDuplicate: BOOL := FALSE;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[TEST('TEST: Try add duplicate positions');
+
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle1, 
+	inputShoulder:= inputShoulderAngle1, 
+	inputElbow:= inputElbowAngle1, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> actualBaseAngle1, 
+	outputShoulder=> actualShoulderAngle1, 
+	outputElbow=> actualElbowAngle1, 
+	numberRecordedPositions=> , 
+	arrayFull=> );
+	
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle2, 
+	inputShoulder:= inputShoulderAngle2, 
+	inputElbow:= inputElbowAngle2, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 1, 
+	deletePositions:= FALSE, 
+	outputBase=> actualBaseAngle2, 
+	outputShoulder=> actualShoulderAngle2, 
+	outputElbow=> actualElbowAngle2, 
+	numberRecordedPositions=> , 
+	arrayFull=> );
+	
+IF (actualBaseAngle1 = actualBaseAngle2) AND (actualShoulderAngle1 = actualShoulderAngle2) AND (actualElbowAngle1 = actualElbowAngle1) THEN
+	arePositionsDuplicate := TRUE;
+END_IF
+
+AssertEquals(Expected := expectedResult,
+	Actual := arePositionsDuplicate,
+	Message := 'Not allowed to add duplicate values!');
+	
+TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
   </POU>
