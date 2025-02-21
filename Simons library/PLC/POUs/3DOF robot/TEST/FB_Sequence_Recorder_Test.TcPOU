@@ -35,7 +35,7 @@ FB_Seq_Rec(
 	outputShoulder=> , 
 	outputElbow=> , 
 	numberRecordedPositions=> , 
-	arrayFull=> );
+	ERROR_arrayFull=> );
 
 IF recordPosition THEN
 	recordPosition := FALSE;
@@ -79,7 +79,7 @@ FB_Seq_Rec(
 	outputShoulder=> , 
 	outputElbow=> , 
 	numberRecordedPositions=> , 
-	arrayFull=> );
+	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
 	inputBase:= inputBaseAngle2, 
@@ -92,7 +92,7 @@ FB_Seq_Rec(
 	outputShoulder=> actualShoulderAngle2, 
 	outputElbow=> , 
 	numberRecordedPositions=> , 
-	arrayFull=> );
+	ERROR_arrayFull=> );
 
 delete := TRUE;
 recordPosition := FALSE;
@@ -108,7 +108,7 @@ FB_Seq_Rec(
 	outputShoulder=> actualShoulderAngle2, 
 	outputElbow=> , 
 	numberRecordedPositions=> , 
-	arrayFull=> );
+	ERROR_arrayFull=> );
 
 delete := FALSE;
 recordPosition := TRUE;
@@ -125,7 +125,7 @@ FB_Seq_Rec(
 	outputShoulder=> actualShoulderAngle2, 
 	outputElbow=> , 
 	numberRecordedPositions=> , 
-	arrayFull=> );	
+	ERROR_arrayFull=> );	
 
 AssertEquals(Expected := expectedShoulderAngle2,
 	Actual := actualShoulderAngle2,
@@ -165,7 +165,7 @@ FB_Seq_Rec(
 	outputShoulder=> , 
 	outputElbow=> , 
 	numberRecordedPositions=> , 
-	arrayFull=> );
+	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
 	inputBase:= inputBaseAngle2, 
@@ -178,7 +178,7 @@ FB_Seq_Rec(
 	outputShoulder=> actualShoulderAngle2, 
 	outputElbow=> , 
 	numberRecordedPositions=> , 
-	arrayFull=> );
+	ERROR_arrayFull=> );
 
 IF recordPosition THEN
 	recordPosition := FALSE;
@@ -189,6 +189,15 @@ AssertEquals(Expected := expectedShoulderAngle2,
 	Message := 'Position 2 was not recorded');
 	
 TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ArrayFull" Id="{f3928984-d735-43f1-8d6a-1440fcb37427}">
+      <Declaration><![CDATA[METHOD ArrayFull
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="ClearPositions" Id="{03ab6b4d-1a72-4043-b3ca-81bc8d2c5f10}">
@@ -223,7 +232,7 @@ FB_Seq_Rec(
 	outputShoulder=> , 
 	outputElbow=> , 
 	numberRecordedPositions=> , 
-	arrayFull=> );
+	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
 	inputBase:= inputBaseAngle2, 
@@ -236,7 +245,7 @@ FB_Seq_Rec(
 	outputShoulder=> actualShoulderAngle2, 
 	outputElbow=> , 
 	numberRecordedPositions=> , 
-	arrayFull=> );
+	ERROR_arrayFull=> );
 
 IF recordPosition THEN
 	recordPosition := FALSE;
@@ -255,7 +264,7 @@ FB_Seq_Rec(
 	outputShoulder=> actualShoulderAngle2, 
 	outputElbow=> , 
 	numberRecordedPositions=> , 
-	arrayFull=> );
+	ERROR_arrayFull=> );
 
 AssertEquals(Expected := expectedShoulderAngle2,
 	Actual := actualShoulderAngle2,
@@ -264,30 +273,12 @@ AssertEquals(Expected := expectedShoulderAngle2,
 TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="ReadPositionAtIndex" Id="{ea34b956-ca49-44d9-87ea-92c3dd07c58f}">
-      <Declaration><![CDATA[METHOD ReadPositionAtIndex
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="ReturnTwoPositions" Id="{29c1f1ce-f976-43a3-82a0-8a3a1034c1e6}">
-      <Declaration><![CDATA[METHOD ReturnTwoPositions
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="TryAddDuplicatePosition" Id="{ffc03e01-d799-4489-b7b1-8122c4070b44}">
       <Declaration><![CDATA[METHOD TryAddDuplicatePosition
 VAR
-	inputBaseAngle1 : INT := 0;
-	inputShoulderAngle1 : INT := 0;
-	inputElbowAngle1 : INT := 0;
+	inputBaseAngle1 : INT := 123;
+	inputShoulderAngle1 : INT := 123;
+	inputElbowAngle1 : INT := 123;
 	expectedBaseAngle1 : INT := 0;
 	inputBaseAngle2 : INT := 0;
 	inputShoulderAngle2 : INT := 0;
@@ -318,7 +309,7 @@ FB_Seq_Rec(
 	outputShoulder=> actualShoulderAngle1, 
 	outputElbow=> actualElbowAngle1, 
 	numberRecordedPositions=> , 
-	arrayFull=> );
+	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
 	inputBase:= inputBaseAngle2, 
@@ -331,7 +322,7 @@ FB_Seq_Rec(
 	outputShoulder=> actualShoulderAngle2, 
 	outputElbow=> actualElbowAngle2, 
 	numberRecordedPositions=> , 
-	arrayFull=> );
+	ERROR_arrayFull=> );
 	
 IF (actualBaseAngle1 = actualBaseAngle2) AND (actualShoulderAngle1 = actualShoulderAngle2) AND (actualElbowAngle1 = actualElbowAngle1) THEN
 	arePositionsDuplicate := TRUE;
