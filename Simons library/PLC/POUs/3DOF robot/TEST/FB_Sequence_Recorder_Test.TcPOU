@@ -7,7 +7,8 @@
 AddTwoPositions();
 ClearPositions();
 AddTwoClearAddOne();
-TryAddDuplicatePosition();]]></ST>
+TryAddDuplicatePosition();
+NumberOfPositionsStored();]]></ST>
     </Implementation>
     <Method Name="AddOnePosition" Id="{250ab92c-fe4b-4de2-89fa-461cfea3cf83}">
       <Declaration><![CDATA[METHOD AddOnePosition
@@ -275,11 +276,138 @@ TEST_FINISHED();]]></ST>
     </Method>
     <Method Name="NumberOfPositionsStored" Id="{d14cd669-2d30-4ef8-9b8f-5a4f63e5eb68}">
       <Declaration><![CDATA[METHOD NumberOfPositionsStored : REFERENCE TO FB_Test
-VAR_INPUT
+VAR
+	FB_Seq_Rec: FB_Sequence_Recorder;
+	expectedNumberOfPositionsStored : INT := 5;
+	actualNumberOfPositionsStored : INT;
 END_VAR
-]]></Declaration>
+	]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[TEST('Return number of positions stored');
+
+FB_Seq_Rec(
+	inputBase:= 0, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= TRUE, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> );
+	
+FB_Seq_Rec(
+	inputBase:= 1, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= TRUE, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> );
+	
+FB_Seq_Rec(
+	inputBase:= 0, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= TRUE, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> );
+
+// DELETE
+FB_Seq_Rec(
+	inputBase:= 1, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= FALSE, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= TRUE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> );
+	
+FB_Seq_Rec(
+	inputBase:= 0, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= TRUE, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> );
+	
+FB_Seq_Rec(
+	inputBase:= 1, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= TRUE, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> );
+	
+FB_Seq_Rec(
+	inputBase:= 0, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= TRUE, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> );
+	
+FB_Seq_Rec(
+	inputBase:= 1, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= TRUE, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> );
+	
+FB_Seq_Rec(
+	inputBase:= 0, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= TRUE, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> actualNumberOfPositionsStored, 
+	ERROR_arrayFull=> );
+	
+AssertEquals(Expected := expectedNumberOfPositionsStored,
+	Actual := actualNumberOfPositionsStored,
+	Message := 'Wrong number of positions stored returned');
+	
+TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
     <Method Name="TryAddDuplicatePosition" Id="{ffc03e01-d799-4489-b7b1-8122c4070b44}">
