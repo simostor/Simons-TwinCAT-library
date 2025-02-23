@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="Manual_Testing_Ramp" Id="{b05dbe0b-9566-4a33-86ad-c3b57030441b}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Manual_Testing_Ramp
+VAR
+	FB_ramp : FB_CTRL_RAMP_GENERATOR;
+	enable : BOOL := FALSE;
+	start : REAL := 0;
+	target : REAL := 1000000;
+	out : LREAL;
+	velOut : LREAL;
+	valueReached : BOOL;
+	state : E_CTRL_STATE;
+	errorId : E_CTRL_ERRORCODES;
+	error : BOOL;
+	velNeg : REAL := 1000;
+	velPos : REAL := 1000;
+	ctrlCycleTime : TIME := T#10MS;
+	taskCycleTime : TIME := T#10MS;
+	parameters : ST_CTRL_RAMP_GENERATOR_PARAMS;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[parameters.fVeloNeg := velNeg;
+parameters.fVeloPos := velPos;
+parameters.tCtrlCycleTime := ctrlCycleTime;
+parameters.tTaskCycleTime := taskCycleTime;
+FB_ramp(
+	bEnable:= enable, 
+	fStart:= start, 
+	fTarget:= target, 
+	fOut=> out, 
+	fVeloOut=> velOut, 
+	bValueReached=> valueReached, 
+	eErrorId=> errorId, 
+	bError=> error, 
+	stParams:= parameters);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
