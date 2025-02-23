@@ -8,7 +8,8 @@ AddTwoPositions();
 ClearPositions();
 AddTwoClearAddOne();
 TryAddDuplicatePosition();
-NumberOfPositionsStored();]]></ST>
+NumberOfPositionsStored();
+ZeroPositionsStored();]]></ST>
     </Implementation>
     <Method Name="AddOnePosition" Id="{250ab92c-fe4b-4de2-89fa-461cfea3cf83}">
       <Declaration><![CDATA[METHOD AddOnePosition
@@ -274,6 +275,16 @@ AssertEquals(Expected := expectedShoulderAngle2,
 TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
+    <Method Name="ErrorIndexOutOfBounds" Id="{d5676aca-9d37-409b-abbd-9c56718a4f10}">
+      <Declaration><![CDATA[METHOD ErrorIndexOutOfBounds
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Should not be able to input values larger than 9, as it is only possible to store 10 positions in the array (0-9)
+// ]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="NumberOfPositionsStored" Id="{d14cd669-2d30-4ef8-9b8f-5a4f63e5eb68}">
       <Declaration><![CDATA[METHOD NumberOfPositionsStored : REFERENCE TO FB_Test
 VAR
@@ -327,8 +338,8 @@ FB_Seq_Rec(
 // DELETE
 FB_Seq_Rec(
 	inputBase:= 1, 
-	inputShoulder:= 0, 
-	inputElbow:= 0, 
+	inputShoulder:= 1, 
+	inputElbow:= 1, 
 	recordPosition:= FALSE, 
 	returnPositionAtIndex:= 0, 
 	deletePositions:= TRUE, 
@@ -339,9 +350,9 @@ FB_Seq_Rec(
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
-	inputBase:= 0, 
-	inputShoulder:= 0, 
-	inputElbow:= 0, 
+	inputBase:= 2, 
+	inputShoulder:= 2, 
+	inputElbow:= 2, 
 	recordPosition:= TRUE, 
 	returnPositionAtIndex:= 0, 
 	deletePositions:= FALSE, 
@@ -352,9 +363,9 @@ FB_Seq_Rec(
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
-	inputBase:= 1, 
-	inputShoulder:= 0, 
-	inputElbow:= 0, 
+	inputBase:= 3, 
+	inputShoulder:= 3, 
+	inputElbow:= 3, 
 	recordPosition:= TRUE, 
 	returnPositionAtIndex:= 0, 
 	deletePositions:= FALSE, 
@@ -365,9 +376,9 @@ FB_Seq_Rec(
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
-	inputBase:= 0, 
-	inputShoulder:= 0, 
-	inputElbow:= 0, 
+	inputBase:= 4, 
+	inputShoulder:= 4, 
+	inputElbow:= 4, 
 	recordPosition:= TRUE, 
 	returnPositionAtIndex:= 0, 
 	deletePositions:= FALSE, 
@@ -378,9 +389,9 @@ FB_Seq_Rec(
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
-	inputBase:= 1, 
-	inputShoulder:= 0, 
-	inputElbow:= 0, 
+	inputBase:= 5, 
+	inputShoulder:= 5, 
+	inputElbow:= 5, 
 	recordPosition:= TRUE, 
 	returnPositionAtIndex:= 0, 
 	deletePositions:= FALSE, 
@@ -391,9 +402,9 @@ FB_Seq_Rec(
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
-	inputBase:= 0, 
-	inputShoulder:= 0, 
-	inputElbow:= 0, 
+	inputBase:= 6, 
+	inputShoulder:= 6, 
+	inputElbow:= 6, 
 	recordPosition:= TRUE, 
 	returnPositionAtIndex:= 0, 
 	deletePositions:= FALSE, 
@@ -468,6 +479,42 @@ END_IF
 AssertEquals(Expected := expectedResult,
 	Actual := arePositionsDuplicate,
 	Message := 'Not allowed to add duplicate values!');
+	
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ZeroPositionsStored" Id="{4c065336-aeb8-472c-a310-efdea5a737d7}">
+      <Declaration><![CDATA[METHOD ZeroPositionsStored
+VAR
+	inputBaseAngle : INT := 123;
+	inputShoulderAngle : INT := 123;
+	inputElbowAngle : INT := 123;
+	expectedNumberOfPositionsStored : INT := 0;
+	actualNumberOfPositionsStored : INT;
+	FB_Seq_Rec: FB_Sequence_Recorder;
+	recordPosition : BOOL := FALSE;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TEST: Zero positions added');
+
+FB_Seq_Rec(
+	inputBase:= inputBaseAngle, 
+	inputShoulder:= inputShoulderAngle, 
+	inputElbow:= inputElbowAngle, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> actualNumberOfPositionsStored, 
+	ERROR_arrayFull=> );
+
+
+AssertEquals(Expected := expectedNumberOfPositionsStored,
+	Actual := actualNumberOfPositionsStored,
+	Message := 'There are no positions recorrded');
 	
 TEST_FINISHED();]]></ST>
       </Implementation>
