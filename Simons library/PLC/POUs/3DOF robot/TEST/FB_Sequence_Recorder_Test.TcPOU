@@ -9,7 +9,8 @@ ClearPositions();
 AddTwoClearAddOne();
 TryAddDuplicatePosition();
 NumberOfPositionsStored();
-ZeroPositionsStored();]]></ST>
+ZeroPositionsStored();
+ArrayFull();]]></ST>
     </Implementation>
     <Method Name="AddOnePosition" Id="{250ab92c-fe4b-4de2-89fa-461cfea3cf83}">
       <Declaration><![CDATA[METHOD AddOnePosition
@@ -195,11 +196,164 @@ TEST_FINISHED();]]></ST>
     </Method>
     <Method Name="ArrayFull" Id="{f3928984-d735-43f1-8d6a-1440fcb37427}">
       <Declaration><![CDATA[METHOD ArrayFull
-VAR_INPUT
-END_VAR
-]]></Declaration>
+VAR
+	expectedFeedback : BOOL := TRUE;
+	actualFeedback : BOOL;
+	FB_Seq_Rec: FB_Sequence_Recorder;
+	recordPosition : BOOL := TRUE;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[TEST('TEST: Array full');
+
+FB_Seq_Rec(
+	inputBase:= 1, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> actualFeedback);
+	
+FB_Seq_Rec(
+	inputBase:= 2, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> actualFeedback);
+	
+FB_Seq_Rec(
+	inputBase:= 3, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> actualFeedback);
+	
+FB_Seq_Rec(
+	inputBase:= 4, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> actualFeedback);
+	
+FB_Seq_Rec(
+	inputBase:= 5, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> actualFeedback);
+	
+FB_Seq_Rec(
+	inputBase:= 6, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> actualFeedback);
+	
+FB_Seq_Rec(
+	inputBase:= 7, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> actualFeedback);
+	
+FB_Seq_Rec(
+	inputBase:= 8, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> actualFeedback);
+	
+FB_Seq_Rec(
+	inputBase:= 9, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> actualFeedback);
+	
+FB_Seq_Rec(
+	inputBase:= 10, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> actualFeedback);
+	
+FB_Seq_Rec(
+	inputBase:= 11, 
+	inputShoulder:= 0, 
+	inputElbow:= 0, 
+	recordPosition:= recordPosition, 
+	returnPositionAtIndex:= 0, 
+	deletePositions:= FALSE, 
+	outputBase=> , 
+	outputShoulder=> , 
+	outputElbow=> , 
+	numberRecordedPositions=> , 
+	ERROR_arrayFull=> actualFeedback);
+
+
+AssertEquals(Expected := expectedFeedback,
+	Actual := actualFeedback,
+	Message := 'Alarm indicating full array not activated');
+	
+TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ClearPositions" Id="{03ab6b4d-1a72-4043-b3ca-81bc8d2c5f10}">
@@ -306,7 +460,7 @@ FB_Seq_Rec(
 	outputBase=> , 
 	outputShoulder=> , 
 	outputElbow=> , 
-	numberRecordedPositions=> , 
+	numberRecordedPositions=> actualNumberOfPositionsStored, 
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
@@ -319,7 +473,7 @@ FB_Seq_Rec(
 	outputBase=> , 
 	outputShoulder=> , 
 	outputElbow=> , 
-	numberRecordedPositions=> , 
+	numberRecordedPositions=> actualNumberOfPositionsStored, 
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
@@ -332,7 +486,7 @@ FB_Seq_Rec(
 	outputBase=> , 
 	outputShoulder=> , 
 	outputElbow=> , 
-	numberRecordedPositions=> , 
+	numberRecordedPositions=> actualNumberOfPositionsStored, 
 	ERROR_arrayFull=> );
 
 // DELETE
@@ -346,7 +500,7 @@ FB_Seq_Rec(
 	outputBase=> , 
 	outputShoulder=> , 
 	outputElbow=> , 
-	numberRecordedPositions=> , 
+	numberRecordedPositions=> actualNumberOfPositionsStored, 
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
@@ -359,7 +513,7 @@ FB_Seq_Rec(
 	outputBase=> , 
 	outputShoulder=> , 
 	outputElbow=> , 
-	numberRecordedPositions=> , 
+	numberRecordedPositions=> actualNumberOfPositionsStored, 
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
@@ -372,7 +526,7 @@ FB_Seq_Rec(
 	outputBase=> , 
 	outputShoulder=> , 
 	outputElbow=> , 
-	numberRecordedPositions=> , 
+	numberRecordedPositions=> actualNumberOfPositionsStored, 
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
@@ -385,7 +539,7 @@ FB_Seq_Rec(
 	outputBase=> , 
 	outputShoulder=> , 
 	outputElbow=> , 
-	numberRecordedPositions=> , 
+	numberRecordedPositions=> actualNumberOfPositionsStored, 
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(
@@ -398,7 +552,7 @@ FB_Seq_Rec(
 	outputBase=> , 
 	outputShoulder=> , 
 	outputElbow=> , 
-	numberRecordedPositions=> , 
+	numberRecordedPositions=> actualNumberOfPositionsStored, 
 	ERROR_arrayFull=> );
 	
 FB_Seq_Rec(

@@ -27,35 +27,57 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF recordPosition AND currentIndex <> 0 THEN
-	IF basePositions[currentIndex] = inputBase AND shoulderPositions[currentIndex] = inputShoulder AND elbowPositions[currentIndex] = inputElbow THEN
-		ERROR_duplicateValue := TRUE;
-	ELSE
-		ERROR_duplicateValue := FALSE;
-	END_IF
-END_IF
+      <ST><![CDATA[(* Handle deletion of all positions *)
+IF deletePositions THEN
+    FOR i := 0 TO 9 DO
+        basePositions[i] := 0;
+        shoulderPositions[i] := 0;
+        elbowPositions[i] := 0;
+    END_FOR
+    numberRecordedPositions := 0;
+    currentIndex := 0;
+ELSE
+    (* Ensure we do not exceed the array bounds *)
+    IF currentIndex >= 10 THEN
+        ERROR_arrayFull := TRUE;
+    ELSE
+        ERROR_arrayFull := FALSE;
+        
+        (* Check for duplicate only if at least one position is recorded *)
+        IF recordPosition AND currentIndex > 0 THEN
+            IF basePositions[currentIndex - 1] = inputBase AND 
+               shoulderPositions[currentIndex - 1] = inputShoulder AND 
+               elbowPositions[currentIndex - 1] = inputElbow THEN
+                ERROR_duplicateValue := TRUE;
+            ELSE
+                ERROR_duplicateValue := FALSE;
+            END_IF
+        END_IF
 
+        (* Record position if not a duplicate and space is available *)
+        IF recordPosition AND NOT ERROR_duplicateValue AND NOT ERROR_arrayFull THEN
+            basePositions[currentIndex] := inputBase;
+            shoulderPositions[currentIndex] := inputShoulder;
+            elbowPositions[currentIndex] := inputElbow;
+            currentIndex := currentIndex + 1;
+        END_IF
+    END_IF
 
-IF recordPosition AND NOT ERROR_duplicateValue THEN
-	basePositions[currentIndex] := inputBase;
-	shoulderPositions[currentIndex] := inputShoulder;
-	elbowPositions[currentIndex] := inputElbow;
-	currentIndex := currentIndex + 1;
-	recordPosition := FALSE;
-END_IF
-
-IF deletePositions AND currentIndex <> 0 THEN
-	FOR i := 0 TO 9 DO
-		basePositions[i] := 0;
-		shoulderPositions[i] := 0;
-		elbowPositions[i] := 0;
-	END_FOR
-	currentIndex := 0;
+    (* Update the number of recorded positions *)
+    numberRecordedPositions := currentIndex;
 END_IF;
 
-outputBase := basePositions[returnPositionAtIndex];
-outputShoulder := shoulderPositions[returnPositionAtIndex];
-outputElbow := elbowPositions[returnPositionAtIndex];]]></ST>
+(* Return recorded position based on the requested index, with bounds check *)
+IF returnPositionAtIndex >= 0 AND returnPositionAtIndex < currentIndex THEN
+    outputBase := basePositions[returnPositionAtIndex];
+    outputShoulder := shoulderPositions[returnPositionAtIndex];
+    outputElbow := elbowPositions[returnPositionAtIndex];
+ELSE
+    outputBase := 0;
+    outputShoulder := 0;
+    outputElbow := 0;
+END_IF;
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
