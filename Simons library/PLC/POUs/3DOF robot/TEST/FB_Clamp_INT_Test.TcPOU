@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_Clamp_INT_Test" Id="{75fcef52-5ac9-4e10-ba14-518f6b1b3301}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Clamp_INT_Test  EXTENDS TcUnit.FB_TestSuite]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[OutOfBoundsUpper();
+OutOfBoundsLower();
+ValidInput();]]></ST>
+    </Implementation>
+    <Method Name="OutOfBoundsLower" Id="{536cf890-3896-4b8f-b0f3-3fc4db3dbc65}">
+      <Declaration><![CDATA[METHOD OutOfBoundsLower : REFERENCE TO FB_Test
+VAR
+	Input : INT := -100;
+	Upper : INT := 180;
+	Lower : INT := 0;
+	ExpectedOutput : INT := 0;
+	ActualOutput : INT;
+	Clamp: FB_Clamp_INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TEST: Out of bounds lower');
+
+Clamp(
+	Input:= Input, 
+	UpperLimit:= Upper, 
+	LowerLimit:= Lower, 
+	Output=> ActualOutput, 
+	OutOfBounds=> );
+
+	
+AssertEquals(Expected := ExpectedOutput,
+	Actual := ActualOutput,
+	Message := 'Not expected output');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OutOfBoundsUpper" Id="{0d02038d-9e4f-4be6-8898-4127215ba0b4}">
+      <Declaration><![CDATA[METHOD OutOfBoundsUpper
+VAR
+	Input : INT := 200;
+	Upper : INT := 180;
+	Lower : INT := 0;
+	ExpectedOutput : INT := 180;
+	ActualOutput : INT;
+	Clamp: FB_Clamp_INT;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TEST: Out of bounds upper');
+
+Clamp(
+	Input:= Input, 
+	UpperLimit:= Upper, 
+	LowerLimit:= Lower, 
+	Output=> ActualOutput, 
+	OutOfBounds=> );
+
+	
+AssertEquals(Expected := ExpectedOutput,
+	Actual := ActualOutput,
+	Message := 'Not expected output');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ValidInput" Id="{d6dba15a-9e40-44eb-a58b-29f170bdc2b3}">
+      <Declaration><![CDATA[METHOD ValidInput
+VAR
+	Input : INT := 150;
+	Upper : INT := 180;
+	Lower : INT := 0;
+	ExpectedOutput : INT := 150;
+	ActualOutput : INT;
+	Clamp: FB_Clamp_INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TEST: Valid input');
+
+Clamp(
+	Input:= Input, 
+	UpperLimit:= Upper, 
+	LowerLimit:= Lower, 
+	Output=> ActualOutput, 
+	OutOfBounds=> );
+
+	
+AssertEquals(Expected := ExpectedOutput,
+	Actual := ActualOutput,
+	Message := 'Not expected output');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

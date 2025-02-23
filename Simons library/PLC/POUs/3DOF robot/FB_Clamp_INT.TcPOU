@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_Clamp_INT" Id="{2ba1dd3b-09ce-4302-8ba3-d7e454a61d6a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Clamp_INT
+VAR_INPUT
+	Input : INT;
+	UpperLimit :INT;
+	LowerLimit : INT;
+END_VAR
+VAR_OUTPUT
+	Output : INT;
+	OutOfBounds : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Input > UpperLimit THEN
+	Output := UpperLimit;
+ELSIF Input < LowerLimit THEN
+	Output := LowerLimit;
+ELSIF Input < UpperLimit AND Input > LowerLimit THEN
+	Output := Input;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

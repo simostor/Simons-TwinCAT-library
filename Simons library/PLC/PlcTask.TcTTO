@@ -7,9 +7,6 @@
     <PouCall>
       <Name>PRG_TEST_ThreeDOF_robot</Name>
     </PouCall>
-    <PouCall>
-      <Name>Manual_Test</Name>
-    </PouCall>
     <TaskFBGuid>{a976e68a-718d-4ec7-b4a2-7bbbd1576010}</TaskFBGuid>
     <Fb_init>{0adb4f49-5ab7-4271-a930-4214890efd35}</Fb_init>
     <Fb_exit>{79ecfd67-b561-4761-a7c8-5b96d8b8d809}</Fb_exit>

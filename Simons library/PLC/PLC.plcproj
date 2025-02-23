@@ -21,6 +21,9 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\3DOF robot\FB_Clamp_INT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\3DOF robot\FB_RC_Servo.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -30,13 +33,13 @@
     <Compile Include="POUs\3DOF robot\FB_Sequence_Recorder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\3DOF robot\TEST\FB_Clamp_INT_Test.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\3DOF robot\TEST\FB_RC_Servo_Test.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\3DOF robot\TEST\FB_Sequence_Recorder_Test.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\3DOF robot\TEST\Manual_Test.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\3DOF robot\TEST\PRG_TEST_ThreeDOF_robot.TcPOU">
