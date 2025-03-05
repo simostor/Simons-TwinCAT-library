@@ -3,12 +3,27 @@
   <POU Name="FB_Sequence_Executor" Id="{8e028cab-f19c-4078-aae8-ed50860051cc}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Sequence_Executor
 VAR_INPUT
+	enableSequence : BOOL; // If true, output angles will be ramped. If false, output angles will be freezed
+	baseSetpoint : INT; // Base angle setpoint
+	shoulderSetpoint : INT; // Shoulder angle setpoint
+	elbowSetpoint : INT; // Elbow angle setpoint
+	enableLoop : BOOL; // If true, sequence will start over when finished
+	speed : INT; // Speed of servos
+	numberPositionsRecorded : INT; // Will be used to keep track on when to loop back to first position
+	restart : INT; // Will start sequence from first recorded position
 END_VAR
 VAR_OUTPUT
+	currentBaseAngleSetpoint : INT; // Ramped setpoint to be sent to base servo
+	currentShoulderAngleSetpoint : INT; // Ramped setpoint to be sent to shoulder servo
+	currentElbowAngleSetpoint : INT; // Ramped setpoint to be sent to elbow servo
+	finalPosReached : BOOL; // When sequence is done, this variable will be true
+	selectIndex : INT; // This variable will be incremented when intermediate positions have been reached
 END_VAR
 VAR
-END_VAR
-]]></Declaration>
+	FB_BaseServo : FB_RC_Servo; // Base servo function block
+	FB_ShoulderServo : FB_RC_Servo; // Shoulder servo function block
+	FB_ElbowServo : FB_RC_Servo; // Elbow servo function block
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
